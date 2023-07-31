@@ -9,8 +9,8 @@ import os
 class EnvironmentVariable:
     mongo_db_url: str = os.getenv("MONGO_DB_URL")
     # just for example
-    aws_access_key_id:str 
-    aws_secret_access_key: str 
+    aws_access_key_id:str = os.getenv("AWS_ACCESS_KEY_ID")
+    aws_secret_access_key: str =os.getenv("AWS_SECRET_ACCESS_KEY")
 
 
 # Creating object of class EnvironmentVariable

@@ -18,6 +18,6 @@ env_var = EnvironmentVariable()
 
 # Creating client to interect with the database
 mongo_client = pymongo.MongoClient(env_var.mongo_db_url)
-#TARGET_COLUMN = "class"
+TARGET_COLUMN = "class"
 
 

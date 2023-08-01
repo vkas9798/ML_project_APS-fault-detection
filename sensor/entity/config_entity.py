@@ -2,6 +2,10 @@ from datetime import datetime
 from sensor.exception import SensorException
 from sensor.logger import logging
 import os,sys
+from xgboost import XGBClassifier
+from sensor import utils
+from sklearn.metrics import f1_score
+from typing import Optional
 
 FILE_NAME = "sensor.csv"
 TRAIN_FILE_NAME = "train.csv"
@@ -47,13 +51,20 @@ class DataValidationConfig:
 
 class DataTransformationConfig:
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
-        self.data_transformation_dir=os.join.path(self.training_pipeline_config.artifact_dir,"data_transformation")
-        self.transform_object_path=os.join.path(self.data_transformation_dir,"transformer",TRANSFORMER_OBJECT_FILE_NAME)
-        self.transformed_train_path=os.join.path(self.data_transformation_dir,"transformed",TRAIN_FILE_NAME)
-        self.transformed_test_path=os.join.path(self.data_transformation_dir,"transformed",TEST_FILE_NAME)
-        self.target_encoder_path=os.join.path(self.data_transformation_dir,"target_encoder",TARGET_ENCODER_OBJECT_FILE_NAME)
+        self.data_transformation_dir=os.path.join(training_pipeline_config.artifact_dir,"data_transformation")
+        self.transform_object_path=os.path.join(self.data_transformation_dir,"transformer",TRANSFORMER_OBJECT_FILE_NAME)
+        self.transformed_train_path=os.path.join(self.data_transformation_dir,"transformed",TRAIN_FILE_NAME.replace("csv","npz"))
+        self.transformed_test_path=os.path.join(self.data_transformation_dir,"transformed",TEST_FILE_NAME.replace("csv","npz"))
+        self.target_encoder_path=os.path.join(self.data_transformation_dir,"target_encoder",TARGET_ENCODER_OBJECT_FILE_NAME)
 
 
-class ModelTrainerConfig:...
+class ModelTrainerConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_training_dir=os.path.join(training_pipeline_config.artifact_dir , "model_trainer")
+        self.model_path=os.path.join(self.model_training_dir,"model",MODEL_FILE_NAME)
+        self.expected_score = 0.7
+        self.overfitting_threshold = 0.1
+
+
 class ModelEvaluationConfig:...
 class ModelPusherConfig:...

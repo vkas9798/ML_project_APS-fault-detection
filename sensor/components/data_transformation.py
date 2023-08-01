@@ -10,7 +10,8 @@ import numpy as np
 from sensor.config import TARGET_COLUMN
 
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder, RobustScaler, Pipeline
+from sklearn.preprocessing import LabelEncoder, RobustScaler
+from sklearn.pipeline import Pipeline
 from imblearn.combine import SMOTETomek
 
 

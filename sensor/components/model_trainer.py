@@ -10,6 +10,7 @@ from sklearn.metrics import f1_score
 class ModelTrainer:
     def __init__(self,model_trainer_config:config_entity.ModelEvaluationConfig,data_transformation_artifact:artifact_entity.DataTransformationArtifact):
         try:
+            logging.info(f"{'>>'*20} Model Trainer {'<<'*20}")
             self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact=data_transformation_artifact
         except Exception as e:
